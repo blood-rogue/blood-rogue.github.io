@@ -1,0 +1,21 @@
+export const languages: { [key: string]: string } = {
+  "text/html": "html",
+  "application/javascript": "javascript",
+  "application/x-python": "python",
+  "text/x-java-source": "java",
+  "application/x-ruby": "ruby",
+  "text/css": "css",
+  "text/x-yaml": "yaml",
+  "text/markdown": "markdown",
+  "application/vnd.dart": "dart",
+  "application/xml": "xml",
+  "application/json": "json",
+  "application/x-sh": "shell",
+  "text/csv": "csv",
+  "text/plain": "gitconfig",
+  "application/x-sql": "tsql",
+  "application/x-httpd-php": "php",
+  "text/tab-separated-values": "tsv",
+  "image/svg+xml": "svg",
+  "video/MP2T": "typescript"
+}
