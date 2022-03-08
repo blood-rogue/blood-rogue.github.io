@@ -1,0 +1,2 @@
+(self.webpackChunkblood_rogue_github_io=self.webpackChunkblood_rogue_github_io||[]).push([[94519],{94519:function(){Prism.languages.t4=Prism.languages["t4-cs"]=Prism.languages["t4-templating"].createT4("csharp")}}]);
+//# sourceMappingURL=94519.9f6e0ce2.chunk.js.map

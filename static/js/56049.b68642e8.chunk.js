@@ -1,0 +1,2 @@
+(self.webpackChunkblood_rogue_github_io=self.webpackChunkblood_rogue_github_io||[]).push([[56049],{56049:function(){Prism.languages.hpkp={directive:{pattern:/\b(?:includeSubDomains|max-age|pin-sha256|preload|report-to|report-uri|strict)(?=[\s;=]|$)/i,alias:"property"},operator:/=/,punctuation:/;/}}}]);
+//# sourceMappingURL=56049.b68642e8.chunk.js.map
