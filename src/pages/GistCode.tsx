@@ -12,6 +12,7 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
   const [filenames, setFilenames] = React.useState<string[]>([]);
   const [active, setActive] = React.useState("")
   const [copyContents, setCopyContents] = React.useState("Copy")
+  const [ripple, setRipple] = React.useState<JSX.IntrinsicElements["span"]>(<span />)
   
   React.useEffect(() => {
     axios.get<Gist>("https://api.github.com/gists/" + gistId)
@@ -34,10 +35,26 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
       })
       .then((f) => setActive(f[0]))
   }, [gistId]);
+
+  const createRipple: React.MouseEventHandler<HTMLButtonElement> = (ev) => {
+    const button = ev.currentTarget
+    const diameter = Math.max(button.clientWidth, button.clientHeight)
+    const radius = diameter / 2
+
+    setRipple(<span className="gist-code__filename-ripple" style={{
+      width: `${diameter}px`,
+      height: `${diameter}px`,
+      left: `${ev.clientX - button.offsetLeft - radius}px`,
+      top: `${ev.clientY - button.offsetTop - radius}px`
+    }}></span>)
+  }
   
   const FileButton: React.FC<{ filename: string, active: boolean }> = ({ filename, active }) => active
-    ? <button className="gist-code__filename-btn">{filename}</button>
-    : <button onClick={() => setActive(filename)} className="gist-code__filename-btn">{filename}</button>
+    ? <button onClick={createRipple} className="gist-code__filename-btn">{filename}{ripple}</button>
+    : <button onClick={(ev) => {
+        setActive(filename);
+        createRipple(ev)
+      }} className="gist-code__filename-btn">{filename}{ripple}</button>
   
   const copy = () => {
     if (gist && navigator.clipboard) {

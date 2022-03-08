@@ -137,6 +137,17 @@
   @apply rounded-r-none border-neutral-700 bg-neutral-800 h-8 pb-1 pl-3 w-1/5 text-center text-neutral-300 font-medium text-sm font-mono after:content-['\2022'] after:text-xl after:px-2 after:text-right after:text-green-500 mx-1 select-none min-w-min
 }
 
+.gist-code__filename-ripple {
+  @apply absolute rounded-[50%] bg-white bg-opacity-60 animate-[ripple_600ms_linear] scale-0
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
 .gist-code__container {
   @apply h-5/6 w-5/6 bg-neutral-800 rounded-lg border-t-[6px] border-t-neutral-900 grid grid-rows-[repeat(17,_minmax(0,_1fr))]
 }
