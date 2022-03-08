@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Buffer } from "buffer";
 import { User } from "../api";
 import { BuildingIcon, LocationDotIcon } from "./icons";
 

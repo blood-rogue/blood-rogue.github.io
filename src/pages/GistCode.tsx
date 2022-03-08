@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { lazy, useContext, useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import { Gist } from "../api";
 import { getHtml } from "../highlighter";
 import retry from "../utils/retry";

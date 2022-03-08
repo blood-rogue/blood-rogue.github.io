@@ -33,7 +33,7 @@ const Loader: React.FC = () => {
       window.removeEventListener("storage", handleLoaded)
       window.removeEventListener("storage", handleError)
     }
-  }, [])
+  }, [handleError, handleLoaded])
 
   const chars = "\\|/-"
 
@@ -48,7 +48,7 @@ const Loader: React.FC = () => {
   useEffect(() => {
     const id = setInterval(() => increaseWidth(loadedRef.current), 7)
     return () => clearInterval(id)
-  }, [loadedRef.current])
+  }, [loadedRef])
 
   return (
   <div className="loader__container">

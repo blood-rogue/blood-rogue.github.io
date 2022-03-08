@@ -1,4 +1,4 @@
-import React, { useState, useRef, lazy, useLayoutEffect, useContext } from 'react';
+import React, { useState, useRef, lazy, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { User, RepoList, GistList, repoListUrl, gistListUrl } from '../api'
 import "./Home.css"
