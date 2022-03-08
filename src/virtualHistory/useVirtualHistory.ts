@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import React from "react"
 
 export const useVirtualHistory = () => {
-  const [hist, setHist] = useState<string[]>([])
-  const [path, setPath] = useState("")
+  const [hist, setHist] = React.useState<string[]>([])
+  const [path, setPath] = React.useState("")
 
   const handleClick = (ev: MouseEvent) => {
     const targets = ev.composedPath().map((et) => (et as HTMLElement)).filter((elem) => elem.tagName.toLowerCase() === "a")
@@ -13,7 +13,7 @@ export const useVirtualHistory = () => {
       setPath(href)
     }
   }
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener("click", handleClick)
     return document.removeEventListener("click", handleClick)
   })

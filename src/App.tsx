@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useLayoutEffect, useState } from "react";
+import React from "react";
 import { MoonIcon, SunIcon } from "./components/icons";
 import { urls, User, userUrl } from "./api";
 import axios from "axios";
@@ -6,18 +6,18 @@ import ContextMenu from "./components/ContextMenu";
 import SourceModal from "./components/SourceModal";
 import retry from "./utils/retry";
 
-const Footer = lazy(() => retry(() => import("./components/Footer")))
-const Home = lazy(() => retry(() => import("./pages/Home")))
-const GistCode = lazy(() => retry(() => import("./pages/GistCode")))
+const Footer = React.lazy(() => retry(() => import("./components/Footer")))
+const Home = React.lazy(() => retry(() => import("./pages/Home")))
+const GistCode = React.lazy(() => retry(() => import("./pages/GistCode")))
 
 const App: React.FC = () => {
-  const [open, setOpen] = useState(false)
-  const [forward, setForward] = useState(false)
-  const [user, setUser] = useState<User | null>(null)
-  const [contextMenu, setContextMenu] = useState<{ open: boolean, ev: MouseEvent }>({ open: false, ev: new MouseEvent("contextmenu") })
-  const [theme, setTheme] = useState<"dark" | "light">(("theme" in localStorage) ? localStorage.theme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  const [open, setOpen] = React.useState(false)
+  const [forward, setForward] = React.useState(false)
+  const [user, setUser] = React.useState<User | null>(null)
+  const [contextMenu, setContextMenu] = React.useState<{ open: boolean, ev: MouseEvent }>({ open: false, ev: new MouseEvent("contextmenu") })
+  const [theme, setTheme] = React.useState<"dark" | "light">(("theme" in localStorage) ? localStorage.theme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     document.documentElement.classList.add("scrollbar-thin", "scrollbar-track-zinc-900", "scrollbar-thumb-zinc-800", "hover:scrollbar-thumb-zinc-700")
     localStorage.theme = theme
     if (theme === "dark") {
@@ -27,7 +27,7 @@ const App: React.FC = () => {
     }
   }, [theme])
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     axios.get<User>(userUrl).then(res => setUser(res.data))
   }, [])
 
@@ -67,7 +67,7 @@ const App: React.FC = () => {
     a.click()
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener("contextmenu", handleContextMenu)
     document.addEventListener("keydown", handleKeyDown)
     document.addEventListener("click", handleClick)
@@ -80,7 +80,7 @@ const App: React.FC = () => {
 
   const themeBtn = <button onClick={() => theme === "dark" ? setTheme("light") : setTheme("dark")}>{theme === "dark" ? <MoonIcon />: <SunIcon />}</button>
 
-  useEffect(() => {
+  React.useEffect(() => {
   if (open) {
     document.body.classList.add("blur-sm")
   } else {

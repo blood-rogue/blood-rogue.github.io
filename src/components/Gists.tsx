@@ -1,8 +1,8 @@
-import React, { createRef } from "react";
+import React from "react";
 import { GistList } from "../api";
 
 const Gists: React.FC<{ gists: GistList[] }> = ({ gists }) => {
-  const linkRefs = gists.map(() => createRef<HTMLAnchorElement>())
+  const linkRefs = gists.map(() => React.createRef<HTMLAnchorElement>())
   
   return (
     <div id="gists" className="flex__col mt-6">

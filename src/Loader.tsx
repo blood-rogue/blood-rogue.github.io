@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import parseBoolean from "./utils/parseBoolean";
 import useInterval from "./utils/useInterval";
 import useRefState from "./utils/useRefState";
 
 const Loader: React.FC = () => {
-  const [num, setNum] = useState(0)
-  const [dots,setDots] = useState(0)
-  const [width, setWidth] = useState(1)
-  const [inc, setInc] = useState(true)
-  const [error, setError] = useState(false)
+  const [num, setNum] = React.useState(0)
+  const [dots,setDots] = React.useState(0)
+  const [width, setWidth] = React.useState(1)
+  const [inc, setInc] = React.useState(true)
+  const [error, setError] = React.useState(false)
   const [loadedRef, setLoaded] = useRefState(0)
 
   const handleLoaded = (ev: StorageEvent) => {
@@ -26,7 +26,7 @@ const Loader: React.FC = () => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener("storage", handleLoaded)
     window.addEventListener("storage", handleError)
     return () => {
@@ -45,7 +45,7 @@ const Loader: React.FC = () => {
     if (width === 300) setInc(false)
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     const id = setInterval(() => increaseWidth(loadedRef.current), 7)
     return () => clearInterval(id)
   }, [loadedRef])

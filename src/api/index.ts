@@ -8,7 +8,6 @@ const repoListUrl = "https://api.github.com/users/blood-rogue/repos"
 const gistListUrl = "https://api.github.com/users/blood-rogue/gists"
 
 const urls = {
-  github : "https://github.com/blood-rogue",
   mail: "mailto:adnaptimsib333@gmail.com"
 }
 

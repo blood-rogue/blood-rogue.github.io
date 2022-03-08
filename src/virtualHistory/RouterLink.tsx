@@ -1,4 +1,4 @@
-import React, { cloneElement, useEffect, useState } from "react";
+import React from "react";
 
 export const RouterLink: React.FC<{ route: string, path: string, component: JSX.Element }> = ({ route, component, path }) => {
   const matches = (p: string, r: string) => {
@@ -15,8 +15,8 @@ export const RouterLink: React.FC<{ route: string, path: string, component: JSX.
     return match
   }
   const pathParts = path.split("/")
-  const [pathProps, setPathProps] = useState<{ [key: string] : string }>({})
-  useEffect(() => {
+  const [pathProps, setPathProps] = React.useState<{ [key: string] : string }>({})
+  React.useEffect(() => {
     if (matches(path, route)) route
       .split("/")
       .forEach((part, idx) => setPathProps(p => {
@@ -25,6 +25,6 @@ export const RouterLink: React.FC<{ route: string, path: string, component: JSX.
       }))
   }, [])
   return (
-    <>{matches(path, route) && cloneElement(component, pathProps)}</>
+    <>{matches(path, route) && React.cloneElement(component, pathProps)}</>
   )
 }

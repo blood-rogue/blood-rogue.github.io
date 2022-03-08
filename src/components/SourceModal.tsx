@@ -16,17 +16,15 @@ const SourceModal: React.FC<{ close: () => void, forward: () => void}> = ({  clo
       </DialogActions>
     </Dialog>
   */
-  <>
-    <div className="source-modal__container">
-      <div className="font-mono">
-        <div className="text-4xl">Lookin' for source code?</div>  
-      </div>
-      <div className="source-modal__action-bar">
-        <button onClick={forward} className="source-modal__yes-btn"><ThumbsUpIcon />&nbsp;Ok</button>
-        <button onClick={close} className="source-modal__no-btn"><ThumbsDownIcon />&nbsp;Nope</button>
-      </div>
+  <div className="source-modal__container">
+    <div className="font-mono">
+      <div className="text-4xl">Lookin' for source code?</div>  
     </div>
-  </>)
+    <div className="source-modal__action-bar">
+      <button onClick={forward} className="source-modal__yes-btn"><ThumbsUpIcon />&nbsp;Ok</button>
+      <button onClick={close} className="source-modal__no-btn"><ThumbsDownIcon />&nbsp;Nope</button>
+    </div>
+  </div>)
 }
 
 export default SourceModal

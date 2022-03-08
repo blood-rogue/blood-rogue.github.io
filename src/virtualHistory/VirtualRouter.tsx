@@ -1,17 +1,17 @@
-import React, { useState, ReactElement, useEffect } from "react";
+import React from "react";
 import { useVirtualHistory } from "./useVirtualHistory";
 
 export const VirtualRouter: React.FC = ({ children }) => {
   const { path } = useVirtualHistory()
-  const [component, setComponent] = useState<ReactElement | null>(null)
-  const [route, setRoute] = useState("")
-  useEffect(() => {
+  const [component, setComponent] = React.useState<React.ReactElement | null>(null)
+  const [route, setRoute] = React.useState("")
+  React.useEffect(() => {
     if (children instanceof Array) {
       for (var child of children) {
-        if (path === (child as ReactElement).props["route"]) setComponent(child)
+        if (path === (child as React.ReactElement).props["route"]) setComponent(child)
       }
     } else {
-      if (children && path === (children as ReactElement).props["route"]) setComponent(child)
+      if (children && path === (children as React.ReactElement).props["route"]) setComponent(child)
     }
     setRoute(component?.props["route"])
   }, [])

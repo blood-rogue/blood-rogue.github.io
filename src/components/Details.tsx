@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { User } from "../api";
 import { BuildingIcon, LocationDotIcon } from "./icons";
 
 const Details: React.FC<{ user: User }> = ({ user }) => {
-  const [image, setImage] = useState<string | null>(null)
-  useEffect(() => {
+  const [image, setImage] = React.useState<string | null>(null)
+  React.useEffect(() => {
     axios
       .get(user.avatar_url, { responseType: 'blob' })
       .then(response =>  window.URL.createObjectURL(new Blob([response.data])))

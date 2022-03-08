@@ -1,19 +1,19 @@
 import axios from "axios";
-import React, { lazy, useEffect, useState } from "react";
+import React from "react";
 import { Gist } from "../api";
-import { getHtml } from "../highlighter";
+import { getHtml } from "../highlighter/highlighter";
 import retry from "../utils/retry";
 
-const TitleHelmet = lazy(() => retry(() => import("../components/TitleHelmet")))
+const TitleHelmet = React.lazy(() => retry(() => import("../components/TitleHelmet")))
 
 const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
-  const [gist, setGist] = useState<Gist | null>(null);
-  const [html, setHtml] = useState<{ [key: string]: JSX.Element[] }>({})
-  const [filenames, setFilenames] = useState<string[]>([]);
-  const [active, setActive] = useState("")
-  const [copyContents, setCopyContents] = useState("Copy")
+  const [gist, setGist] = React.useState<Gist | null>(null);
+  const [html, setHtml] = React.useState<{ [key: string]: JSX.Element[] }>({})
+  const [filenames, setFilenames] = React.useState<string[]>([]);
+  const [active, setActive] = React.useState("")
+  const [copyContents, setCopyContents] = React.useState("Copy")
   
-  useEffect(() => {
+  React.useEffect(() => {
     axios.get<Gist>("https://api.github.com/gists/" + gistId)
       .then(res => {
         setGist(res.data);

@@ -1,8 +1,8 @@
-import React, { createRef } from "react";
+import React from "react";
 import { RepoList } from "../api"
 
 const Repos = React.forwardRef<HTMLDivElement, {repos: RepoList[]}>(({ repos }, ref) => {
-  const linkRefs = repos.map(() => createRef<HTMLAnchorElement>())
+  const linkRefs = repos.map(() => React.createRef<HTMLAnchorElement>())
   
   return (
     <div ref={ref} id="repos" className="flex__col mt-16">

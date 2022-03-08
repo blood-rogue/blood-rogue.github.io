@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 
 const ContextMenu: React.FC<{ open: boolean, ev: MouseEvent, items?: { name: string, onClick: () => void }[] }> = ({ open, ev, items }) => {
   const { clientX, clientY, pageY, pageX } = ev
   const { innerHeight: h, innerWidth: w } = window
-  const ctxmenuRef = useRef<HTMLDivElement>(null)
+  const ctxmenuRef = React.useRef<HTMLDivElement>(null)
   const [height, width] = ctxmenuRef.current ? [ctxmenuRef.current.clientHeight, ctxmenuRef.current.clientWidth] : [211, 160]
   const [dx, dy] = [width, height]
   const { px, py }: { px: number, py: number } = { px: ((dx + clientX) <= w) ? pageX : (pageX - dx), py: ((dy + clientY) <= h) ? pageY : (pageY - dy) }

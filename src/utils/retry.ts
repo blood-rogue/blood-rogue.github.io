@@ -1,3 +1,5 @@
+import timeout from "./timeout"
+
 interface RetryOptions {
   retriesLeft?: number,
   interval?: number,
@@ -27,7 +29,7 @@ const defaultArgs: Required<RetryOptions> = {
 const retry = <T>(fn: () => Promise<T>, retryOptions: RetryOptions = {}) => {
   const { retriesLeft, retriesDone, interval, increment, onError, onSuccess } = { ...defaultArgs, ...retryOptions } as Required<RetryOptions>
   return new Promise<T>((resolve, reject) => {
-    fn()
+    timeout(fn(), 300)
       .then((ret) => {
         onSuccess()
         return ret

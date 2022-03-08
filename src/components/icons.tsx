@@ -1,7 +1,7 @@
+import React from "react";
 import { faSun, faMoon, faAt, faLink, faLocationDot, faBuilding, faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faGithub, faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import React from "react";
 
 type CustomFontAwesomeIcon = Omit<FontAwesomeIconProps, "icon"> 
 

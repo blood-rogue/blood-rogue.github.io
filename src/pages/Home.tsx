@@ -10,9 +10,9 @@ const Repos = lazy(() => retry(() => import("../components/Repos")))
 const Gists = lazy(() => retry(() => import("../components/Gists")))
 
 const Home: React.FC<{ user: User }> = ({ user }) => {
-  const [repos, setRepos] = useState<RepoList[]>([])
-  const [gists, setGists] = useState<GistList[]>([])
-  const repoRef = useRef<HTMLDivElement>(null)
+  const [repos, setRepos] = React.useState<RepoList[]>([])
+  const [gists, setGists] = React.useState<GistList[]>([])
+  const repoRef = React.useRef<HTMLDivElement>(null)
   
   useLayoutEffect(() => {
     axios.get<RepoList[]>(repoListUrl)
