@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from "./App"
 import Loader from './Loader';
+import DefaultHelmet from './components/DefaultHelmet';
 
 const Root: React.FC = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ const Root: React.FC = () => {
   return (
   <React.StrictMode>
     <React.Suspense fallback={<Loader />}>
+      <DefaultHelmet />
       <App />
     </React.Suspense>
   </React.StrictMode>
