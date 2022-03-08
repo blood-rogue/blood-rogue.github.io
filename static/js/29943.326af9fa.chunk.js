@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkblood_rogue_github_io=self.webpackChunkblood_rogue_github_io||[]).push([[29943],{29943:function(t,e,o){o.r(e);o(72791);var n=o(54270),r=o(80184);e.default=function(t){var e=t.title,o=function(t){return"".concat(t," | Blood Rogue")};return(0,r.jsxs)(n.q,{children:[(0,r.jsx)("title",{children:o(e)}),(0,r.jsx)("meta",{property:"og:title",content:o(e)}),(0,r.jsx)("meta",{property:"og:site_name",content:o(e)})]})}}}]);
-//# sourceMappingURL=29943.326af9fa.chunk.js.map
