@@ -5,13 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    ripple: theme => ({
-      colors: theme('colors')
-    })
   },
   plugins: [
-    require("tailwind-scrollbar"),
-    require("tailwindcss-ripple")()
+    require("tailwind-scrollbar")
   ],
   variants: {
     scrollbar: ['rounded']

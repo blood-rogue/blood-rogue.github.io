@@ -15,7 +15,8 @@ interface SocialAction {
 
 const Footer: React.FC<{
   socialUrls: { [key: string]: string },
-  user: User, themeBtn: JSX.Element
+  user: User,
+  themeBtn: (ref: React.RefObject<HTMLButtonElement> | null) => JSX.Element
 }> = ({ socialUrls, user, themeBtn }) => {
   const urls = Object.keys(socialUrls)
 
@@ -46,6 +47,7 @@ const Footer: React.FC<{
   const facebookRef = React.useRef<HTMLAnchorElement>(null)
   const mailRef = React.useRef<HTMLAnchorElement>(null)
   const blogRef = React.useRef<HTMLAnchorElement>(null)
+  const themeRef = React.useRef<HTMLButtonElement>(null)
 
   React.useEffect(() => {
     if (urls.includes("instagram")) dispatch({ type: "instagram", url: socialUrls["instagram"]})
@@ -56,9 +58,7 @@ const Footer: React.FC<{
   return (
   <>
     <div className="footer__container">
-      <div className="footer__btn">
-        {themeBtn}
-      </div>
+      <div onClick={() => themeRef.current?.click()} className="footer__btn">{themeBtn(themeRef)}</div>
       {user.html_url !== "" && <div onClick={() => githubRef.current?.click()} className="footer__btn"><a ref={githubRef} target="_blank" rel="noopener noreferrer" href={user.html_url}><GithubIcon /></a></div>}
       {user.twitter_username && <div onClick={() => twitterRef.current?.click()} className="footer__btn"><a ref={twitterRef} target="_blank" rel="noopener noreferrer" href={"https://twitter.com/" + user.twitter_username}><TwitterIcon /></a></div>}
       {state.instagram !== "" && <div onClick={() => instagramRef.current?.click()} className="footer__btn"><a ref={instagramRef} target="_blank" rel="noopener noreferrer" href={state.instagram}><InstagramIcon /></a></div>}

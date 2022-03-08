@@ -4,11 +4,12 @@ import { urls, User, userUrl } from "./api";
 import axios from "axios";
 import ContextMenu from "./components/ContextMenu";
 import SourceModal from "./components/SourceModal";
+import Footer from "./components/Footer"
 import retry from "./utils/retry";
+import delay from "./utils/delay";
 
-const Footer = React.lazy(() => retry(() => import("./components/Footer")))
-const Home = React.lazy(() => retry(() => import("./pages/Home")))
-const GistCode = React.lazy(() => retry(() => import("./pages/GistCode")))
+const Home = React.lazy(() => delay(() => retry(() => import("./pages/Home")), 500))
+const GistCode = React.lazy(() => delay(() => retry(() => import("./pages/GistCode")), 500))
 
 const App: React.FC = () => {
   const [open, setOpen] = React.useState(false)
@@ -78,7 +79,7 @@ const App: React.FC = () => {
     }
   })
 
-  const themeBtn = <button onClick={() => theme === "dark" ? setTheme("light") : setTheme("dark")}>{theme === "dark" ? <MoonIcon />: <SunIcon />}</button>
+  const themeBtn = (ref: React.RefObject<HTMLButtonElement> | null) => <button ref={ref} onClick={() => theme === "dark" ? setTheme("light") : setTheme("dark")}>{theme === "dark" ? <MoonIcon />: <SunIcon />}</button>
 
   React.useEffect(() => {
   if (open) {
