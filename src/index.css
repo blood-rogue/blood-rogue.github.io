@@ -126,7 +126,7 @@
 }
 
 .gist-code__code-container {
-  @apply text-sm mt-2 px-3 py-4 row-[span_16_/_span_17] row-start-2 scrollbar-thin scrollbar-track-neutral-700 scrollbar-thumb-neutral-900 text-neutral-200 font-medium font-mono col-span-12 selection:bg-neutral-600 selection:bg-opacity-60
+  @apply text-sm mt-2 px-3 py-4 row-[span_16_/_span_17] row-start-2 scrollbar-track-neutral-700 scrollbar-thumb-neutral-900 text-neutral-200 font-medium font-mono col-span-12 selection:bg-neutral-600 selection:bg-opacity-60
 }
 
 .gist-code__tab-bar {
