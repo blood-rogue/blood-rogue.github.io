@@ -7,6 +7,8 @@ import SourceModal from "./components/SourceModal";
 import Footer from "./components/Footer"
 import retry from "./utils/retry";
 import delay from "./utils/delay";
+import useContextMenu from "./hooks/useContextMenu";
+import useTheme from "./hooks/useTheme";
 
 const Home = React.lazy(() => delay(() => retry(() => import("./pages/Home")), 500))
 const GistCode = React.lazy(() => delay(() => retry(() => import("./pages/GistCode")), 500))
@@ -15,41 +17,17 @@ const App: React.FC = () => {
   const [open, setOpen] = React.useState(false)
   const [forward, setForward] = React.useState(false)
   const [user, setUser] = React.useState<User | null>(null)
-  const [contextMenu, setContextMenu] = React.useState<{ open: boolean, ev: MouseEvent }>({ open: false, ev: new MouseEvent("contextmenu") })
-  const [theme, setTheme] = React.useState<"dark" | "light">(("theme" in localStorage) ? localStorage.theme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-
-  React.useLayoutEffect(() => {
-    document.documentElement.classList.add("scrollbar-thin", "scrollbar-track-zinc-900", "scrollbar-thumb-zinc-800", "hover:scrollbar-thumb-zinc-700")
-    localStorage.theme = theme
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-    }
-  }, [theme])
+  const [ctx, ctxEv] = useContextMenu()
+  const [theme, setTheme] = useTheme()
 
   React.useLayoutEffect(() => {
     axios.get<User>(userUrl).then(res => setUser(res.data))
   }, [])
 
-  const handleContextMenu = (ev: MouseEvent) => {
-    ev.preventDefault()
-    if (!contextMenu.open) setContextMenu({ open: true, ev })
-    else setContextMenu({ open: false, ev: new MouseEvent("contextmenu") })
-  }
-
   const handleKeyDown = (ev: KeyboardEvent) => {
     if (ev.ctrlKey && ev.code === "KeyU") {
       setOpen(!open)
       if (!forward) ev.preventDefault()
-    }
-  }
-
-  const handleClick = (ev: MouseEvent) => {
-    if (contextMenu.open) {
-      ev.preventDefault()
-      setContextMenu({ open: false, ev: new MouseEvent("contextmenu") })
-      return
     }
   }
 
@@ -69,17 +47,11 @@ const App: React.FC = () => {
   }
 
   React.useEffect(() => {
-    document.addEventListener("contextmenu", handleContextMenu)
     document.addEventListener("keydown", handleKeyDown)
-    document.addEventListener("click", handleClick)
-    return () => { 
-      document.removeEventListener("contextmenu", handleContextMenu)
-      document.removeEventListener("keydown", handleKeyDown)
-      document.removeEventListener("click", handleClick)
-    }
+    return () => document.removeEventListener("keydown", handleKeyDown)
   })
 
-  const themeBtn = (ref: React.RefObject<HTMLButtonElement> | null) => <button ref={ref} onClick={() => theme === "dark" ? setTheme("light") : setTheme("dark")}>{theme === "dark" ? <MoonIcon />: <SunIcon />}</button>
+  const themeBtn = (ref: React.RefObject<HTMLButtonElement> | null) => <button ref={ref} onClick={setTheme}>{theme === "dark" ? <MoonIcon />: <SunIcon />}</button>
 
   React.useEffect(() => {
   if (open) {
@@ -92,7 +64,7 @@ const App: React.FC = () => {
     <>
       {user && <Home user={user}/>}
       {open && <SourceModal close={close} forward={useForward} />}
-      {contextMenu.open && <ContextMenu {...contextMenu} />}
+      {ctx && <ContextMenu open={ctx} ev={ctxEv} />}
       <GistCode gistId="269c8a512bcf6b4686e427ff864d7497"/>
       {user && <Footer socialUrls={urls} user={user} themeBtn={themeBtn} />}
     </>

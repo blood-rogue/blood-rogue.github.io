@@ -1,7 +1,7 @@
 import React from "react"
 import parseBoolean from "./utils/parseBoolean";
-import useInterval from "./utils/useInterval";
-import useRefState from "./utils/useRefState";
+import useInterval from "./hooks/useInterval";
+import useRefState from "./hooks/useRefState";
 
 const Loader: React.FC = () => {
   const [num, setNum] = React.useState(0)

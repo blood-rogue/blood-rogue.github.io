@@ -2,7 +2,7 @@ const timeout = <T>(promise: Promise<T>, delay: number) => {
   let id: NodeJS.Timeout
   return Promise.race([
     promise,
-    new Promise<T>((resolve, reject) => {
+    new Promise<T>((_, reject) => {
       id = setTimeout(() => reject(null), delay)
     })
   ])
