@@ -14,7 +14,6 @@ const Loader: React.FC = () => {
   const handleLoaded = (ev: StorageEvent) => {
     const item = localStorage.getItem("loaded")
     if (item && parseInt(item) !== loadedRef.current) {
-      console.log(loadedRef.current, item, 30 * (loadedRef.current + 2))
       setLoaded(parseInt(item))
     }
   }

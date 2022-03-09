@@ -3,7 +3,7 @@ import { GistList } from "../api";
 
 const Gists: React.FC<{ gists: GistList[] }> = ({ gists }) => {
   const linkRefs = gists.map(() => React.createRef<HTMLAnchorElement>())
-  console.log(gists[0].html_url.split("/")[-1])
+
   return (
     <div id="gists" className="flex__col mt-6">
       <span className="sub-header__title">Gists</span>

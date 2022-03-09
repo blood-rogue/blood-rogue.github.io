@@ -6,6 +6,7 @@ const useContextMenu = <T extends HTMLElement>(ref?: React.RefObject<T>) => {
   const handleClick = (ev: MouseEvent) => {
     if (ctx) {
       ev.preventDefault()
+      setCtx(false)
       setCtxEv(null)
     }
   }
@@ -26,7 +27,7 @@ const useContextMenu = <T extends HTMLElement>(ref?: React.RefObject<T>) => {
     }
     else {
       document.addEventListener("contextmenu", handleCtxMenu)
-      document.addEventListener("contextmenu", handleClick)
+      document.addEventListener("click", handleClick)
     }
     return () => {
       if (ref) {
@@ -35,7 +36,7 @@ const useContextMenu = <T extends HTMLElement>(ref?: React.RefObject<T>) => {
       }
       else {
         document.removeEventListener("contextmenu", handleCtxMenu)
-        document.removeEventListener("contextmenu", handleClick)
+        document.removeEventListener("click", handleClick)
       }
     }
   })
