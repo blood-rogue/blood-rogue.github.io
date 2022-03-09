@@ -10,7 +10,7 @@ const Repos = React.forwardRef<HTMLDivElement, {repos: RepoList[]}>(({ repos }, 
       <div>
         {repos.map((el, i) => (
         <div key={i} onClick={() => linkRefs[i].current?.click()} className={el.description === null ? "sub-header__content-empty" : "sub-header__content"}>
-          <a ref={linkRefs[i]} href={el.html_url} target="_blank" rel="noopener noreferrer">{el.description !== null ? el.description : "No Description."}</a>
+          <a ref={linkRefs[i]} href={el.html_url} target="_blank" rel="noopener noreferrer">{el.description !== null ? el.description : `${el.html_url.split("/")[-1].substring(0, 7)}...: No Description.`}</a>
         </div>))}
       </div>
     </div>

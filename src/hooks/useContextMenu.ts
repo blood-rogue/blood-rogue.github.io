@@ -39,7 +39,7 @@ const useContextMenu = <T extends HTMLElement>(ref?: React.RefObject<T>) => {
       }
     }
   })
-  return [ctx, ctxEv] as [boolean, MouseEvent]
+  return [ctx, ctxEv] as [boolean, MouseEvent | null]
 }
 
 export default useContextMenu

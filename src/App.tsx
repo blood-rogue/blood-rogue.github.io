@@ -64,7 +64,7 @@ const App: React.FC = () => {
     <>
       {user && <Home user={user}/>}
       {open && <SourceModal close={close} forward={useForward} />}
-      {ctx && <ContextMenu open={ctx} ev={ctxEv} />}
+      {ctx && <ContextMenu open={ctx} ev={ctxEv ? ctxEv : new MouseEvent("contextmenu", { clientX: 0, clientY: 0 })} />}
       <GistCode gistId="269c8a512bcf6b4686e427ff864d7497"/>
       {user && <Footer socialUrls={urls} user={user} themeBtn={themeBtn} />}
     </>

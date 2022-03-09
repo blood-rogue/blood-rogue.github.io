@@ -1,6 +1,11 @@
 import React from "react";
 
-const ContextMenu: React.FC<{ open: boolean, ev: MouseEvent, items?: { name: string, onClick: () => void }[] }> = ({ open, ev, items }) => {
+interface CtxMenuItem {
+  name: string,
+  onClick: () => void
+}
+
+const ContextMenu: React.FC<{ open: boolean, ev: MouseEvent, items?: CtxMenuItem[] }> = ({ open, ev, items }) => {
   const { clientX, clientY, pageY, pageX } = ev
   const { innerHeight: h, innerWidth: w } = window
   const ctxmenuRef = React.useRef<HTMLDivElement>(null)
