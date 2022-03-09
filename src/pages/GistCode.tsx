@@ -49,12 +49,10 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
     }}></span>)
   }
   
-  const FileButton: React.FC<{ filename: string, active: boolean }> = ({ filename, active }) => active
-    ? <button onClick={createRipple} className="gist-code__filename-btn">{filename}{ripple}</button>
-    : <button onClick={(ev) => {
-        setActive(filename);
-        createRipple(ev)
-      }} className="gist-code__filename-btn">{filename}{ripple}</button>
+  const FileButton: React.FC<{ filename: string, active: boolean }> = ({ filename, active }) => {
+    if (active) return <button onClick={createRipple} className="gist-code__filename-btn">{filename}{ripple}</button>
+    else return <button onClick={(ev) => { setActive(filename); createRipple(ev) }} className="gist-code__filename-btn">{filename}{ripple}</button>
+  }
   
   const copy = () => {
     if (gist && navigator.clipboard) {
