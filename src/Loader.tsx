@@ -3,43 +3,20 @@ import parseBoolean from "./utils/parseBoolean";
 import useInterval from "./hooks/useInterval";
 import useRefState from "./hooks/useRefState";
 import useSuspended from "./hooks/useSuspended";
+import useStorage from "./hooks/useStorage";
 
 const Loader: React.FC = () => {
   const [num, setNum] = React.useState(0)
   const [dots,setDots] = React.useState(0)
   const [width, setWidth] = React.useState(1)
   const [inc, setInc] = React.useState(true)
-  const [error, setError] = React.useState(false)
-  const [loadedRef, setLoaded] = useRefState(0)
   const suspense = useSuspended()
   const [suspended, setSuspended] = React.useState(suspense)
+  const [loadedRef, error] = useStorage()
 
   React.useEffect(() => {
-    if (!suspended) setTimeout(() => setSuspended(false), 500)
+    setTimeout(() => setSuspended(false), 500)
   }, [suspense])
-
-  const handleLoaded = (ev: StorageEvent) => {
-    const item = localStorage.getItem("loaded")
-    if (item && parseInt(item) !== loadedRef.current) {
-      setLoaded(parseInt(item))
-    }
-  }
-
-  const handleError = (ev: StorageEvent) => {
-    const item = localStorage.getItem("error")
-    if (item && parseBoolean(item) !== error) {
-      setError(parseBoolean(item))
-    }
-  }
-
-  React.useEffect(() => {
-    window.addEventListener("storage", handleLoaded)
-    window.addEventListener("storage", handleError)
-    return () => {
-      window.removeEventListener("storage", handleLoaded)
-      window.removeEventListener("storage", handleError)
-    }
-  }, [handleError, handleLoaded])
 
   const chars = "\\|/-"
 
@@ -47,7 +24,7 @@ const Loader: React.FC = () => {
   useInterval(() => setDots(dots === 3 ? 0 : dots + 1), 250)
 
   const increaseWidth = (load: number) => {
-    setWidth(w => (inc && w < (30 * (load + 2))) ? w + 1 : w)
+    setWidth(w => (inc && w < (30 * (load + 3))) ? w + 1 : w)
     if (width === 300) setInc(false)
   }
 
