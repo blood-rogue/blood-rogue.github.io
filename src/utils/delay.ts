@@ -1,6 +1,6 @@
-const delay = async <T>(fn: () => Promise<T>, delay: number) => {
+const delay = async <T>(promise: Promise<T>, delay: number) => {
   const [moduleImport] = await Promise.all([
-    fn(),
+    promise,
     new Promise((resolve) => setTimeout(resolve, delay))
   ])
   return moduleImport

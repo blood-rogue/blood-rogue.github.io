@@ -30,10 +30,10 @@ const defaultArgs: Required<RetryOptions> = {
   }
 }
 
-const retry = <T>(fn: () => Promise<T>, retryOptions: RetryOptions = {}) => {
+const retry = <T>(promise: Promise<T>, retryOptions: RetryOptions = {}) => {
   const { retriesLeft, retriesDone, interval, increment, onError, onSuccess } = { ...defaultArgs, ...retryOptions } as Required<RetryOptions>
   return new Promise<T>((resolve, reject) => {
-    timeout(fn(), 500)
+    timeout(promise, 500)
       .then((ret) => {
         onSuccess()
         return ret
@@ -45,7 +45,7 @@ const retry = <T>(fn: () => Promise<T>, retryOptions: RetryOptions = {}) => {
             onError(error)
             return reject()
           }
-          retry(fn, { increment, onError, onSuccess, retriesLeft: retriesLeft - 1, interval: interval + increment, retriesDone: retriesDone + 1}).then(resolve, reject)
+          retry(promise, { increment, onError, onSuccess, retriesLeft: retriesLeft - 1, interval: interval + increment, retriesDone: retriesDone + 1}).then(resolve, reject)
         }, interval)
       })
   })
