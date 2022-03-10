@@ -4,7 +4,7 @@ import { Gist } from "../api";
 import { getHtml } from "../highlighter/highlighter";
 import retry from "../utils/retry";
 
-const TitleHelmet = React.lazy(() => retry(() => import("../components/TitleHelmet")))
+const TitleHelmet = React.lazy(() => retry(import("../components/TitleHelmet")))
 
 const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
   const [gist, setGist] = React.useState<Gist | null>(null);

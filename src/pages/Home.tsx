@@ -4,10 +4,10 @@ import { User, RepoList, GistList, repoListUrl, gistListUrl } from '../api'
 import "./Home.css"
 import retry from '../utils/retry';
 
-const Details = React.lazy(() => retry(() => import("../components/Details")))
-const TitleHelmet = React.lazy(() => retry(() => import("../components/TitleHelmet")))
-const Repos = React.lazy(() => retry(() => import("../components/Repos")))
-const Gists = React.lazy(() => retry(() => import("../components/Gists")))
+const Details = React.lazy(() => retry(import("../components/Details")))
+const TitleHelmet = React.lazy(() => retry(import("../components/TitleHelmet")))
+const Repos = React.lazy(() => retry(import("../components/Repos")))
+const Gists = React.lazy(() => retry(import("../components/Gists")))
 
 const Home: React.FC<{ user: User }> = ({ user }) => {
   const [repos, setRepos] = React.useState<RepoList[]>([])
