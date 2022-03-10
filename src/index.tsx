@@ -1,9 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from "./App"
 import Loader from './Loader';
+import Suspense from './components/Suspense';
 
 const Root: React.FC = () => {
   React.useEffect(() => {
@@ -16,9 +17,10 @@ const Root: React.FC = () => {
   })
   return (
   <React.StrictMode>
-    <React.Suspense fallback={<Loader />}>
+    <Loader />
+    <Suspense>
       <App />
-    </React.Suspense>
+    </Suspense>
   </React.StrictMode>
   )
 }

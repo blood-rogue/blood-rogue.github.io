@@ -1,20 +1,20 @@
-import React, { useState, useRef, lazy, useLayoutEffect } from 'react';
+import * as React from 'react';
 import axios from 'axios';
 import { User, RepoList, GistList, repoListUrl, gistListUrl } from '../api'
 import "./Home.css"
 import retry from '../utils/retry';
 
-const Details = lazy(() => retry(() => import("../components/Details")))
-const TitleHelmet = lazy(() => retry(() => import("../components/TitleHelmet")))
-const Repos = lazy(() => retry(() => import("../components/Repos")))
-const Gists = lazy(() => retry(() => import("../components/Gists")))
+const Details = React.lazy(() => retry(() => import("../components/Details")))
+const TitleHelmet = React.lazy(() => retry(() => import("../components/TitleHelmet")))
+const Repos = React.lazy(() => retry(() => import("../components/Repos")))
+const Gists = React.lazy(() => retry(() => import("../components/Gists")))
 
 const Home: React.FC<{ user: User }> = ({ user }) => {
   const [repos, setRepos] = React.useState<RepoList[]>([])
   const [gists, setGists] = React.useState<GistList[]>([])
   const repoRef = React.useRef<HTMLDivElement>(null)
   
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     axios.get<RepoList[]>(repoListUrl)
       .then(res => setRepos(res.data))
     axios.get<GistList[]>(gistListUrl)

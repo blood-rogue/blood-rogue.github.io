@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const useInterval = (callback:() => void, delay: number) => {
   const savedCallback = React.useRef<() => void>(() => {});

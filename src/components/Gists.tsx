@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { GistList } from "../api";
 
 const Gists: React.FC<{ gists: GistList[] }> = ({ gists }) => {

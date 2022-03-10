@@ -1,7 +1,8 @@
-import React from "react"
+import * as React from "react"
 import parseBoolean from "./utils/parseBoolean";
 import useInterval from "./hooks/useInterval";
 import useRefState from "./hooks/useRefState";
+import useSuspended from "./hooks/useSuspended";
 
 const Loader: React.FC = () => {
   const [num, setNum] = React.useState(0)
@@ -10,6 +11,12 @@ const Loader: React.FC = () => {
   const [inc, setInc] = React.useState(true)
   const [error, setError] = React.useState(false)
   const [loadedRef, setLoaded] = useRefState(0)
+  const suspense = useSuspended()
+  const [suspended, setSuspended] = React.useState(suspense)
+
+  React.useEffect(() => {
+    if (!suspended) setTimeout(() => setSuspended(false), 500)
+  }, [suspense])
 
   const handleLoaded = (ev: StorageEvent) => {
     const item = localStorage.getItem("loaded")
@@ -50,7 +57,7 @@ const Loader: React.FC = () => {
   }, [loadedRef])
 
   return (
-  <div className="loader__container">
+  <div className={`${suspended ? " flex flex-col" : "hidden"} loader__container`}>
     <div className={error ? "loader__progress-error-bg" : "loader__progress-info-bg"}>
       <div
         style={{

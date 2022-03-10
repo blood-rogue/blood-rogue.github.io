@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { User } from "../api"
 import { AtIcon, FacebookIcon, GithubIcon, InstagramIcon, LinkIcon, TwitterIcon } from "./icons"
 

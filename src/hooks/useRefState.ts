@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const useRefState = <T>(val: T) => {
   const [value, original_setValue] = React.useState(val)

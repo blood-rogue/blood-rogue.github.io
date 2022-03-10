@@ -177,7 +177,7 @@
 }
 
 .loader__container {
-  @apply bg-black w-screen h-screen flex flex-col items-center justify-center
+  @apply bg-black w-screen h-screen items-center justify-center
 }
 
 .loader__progress-info-bg {

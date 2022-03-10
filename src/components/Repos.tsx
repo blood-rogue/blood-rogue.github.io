@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { RepoList } from "../api"
 
 const Repos = React.forwardRef<HTMLDivElement, {repos: RepoList[]}>(({ repos }, ref) => {

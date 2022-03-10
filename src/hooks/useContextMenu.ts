@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 
 const useContextMenu = <T extends HTMLElement>(ref?: React.RefObject<T>) => {
   const [ctx, setCtx] = React.useState(false)

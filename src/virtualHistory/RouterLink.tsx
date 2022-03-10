@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 export const RouterLink: React.FC<{ route: string, path: string, component: JSX.Element }> = ({ route, component, path }) => {
   const matches = (p: string, r: string) => {

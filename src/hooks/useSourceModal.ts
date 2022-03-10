@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const useSourceModal = () => {
   const [open, setOpen] = React.useState(false)

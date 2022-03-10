@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 
 const useTheme = () => {
   const [theme, _setTheme] = React.useState<"dark" | "light">(("theme" in localStorage) ? localStorage.theme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")

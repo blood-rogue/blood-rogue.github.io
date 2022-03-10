@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ThumbsDownIcon, ThumbsUpIcon } from "./icons";
 
 const SourceModal: React.FC<{ close: () => void, forward: () => void}> = ({  close, forward }) => {

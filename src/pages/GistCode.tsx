@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import * as React from "react";
 import { Gist } from "../api";
 import { getHtml } from "../highlighter/highlighter";
 import retry from "../utils/retry";
