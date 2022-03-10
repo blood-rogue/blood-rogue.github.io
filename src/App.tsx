@@ -22,9 +22,9 @@ const App: React.FC = () => {
   const [open, close, forward] = useSourceModal()
   const suspense = useSuspended()
   const [suspended, setSuspended] = React.useState(suspense)
-
+  console.log(suspense, suspended)
   React.useEffect(() => {
-    if (!suspended) setTimeout(() => setSuspended(false), 500)
+    setTimeout(() => setSuspended(false), 500)
   }, [suspense])
 
   React.useLayoutEffect(() => {
