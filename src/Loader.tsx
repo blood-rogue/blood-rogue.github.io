@@ -1,7 +1,5 @@
 import * as React from "react"
-import parseBoolean from "./utils/parseBoolean";
 import useInterval from "./hooks/useInterval";
-import useRefState from "./hooks/useRefState";
 import useSuspended from "./hooks/useSuspended";
 import useStorage from "./hooks/useStorage";
 
@@ -15,7 +13,13 @@ const Loader: React.FC = () => {
   const [loadedRef, error] = useStorage()
 
   React.useEffect(() => {
-    if (suspense !== suspended) setTimeout(() => setSuspended(suspense), 550)
+    if (suspense !== suspended) {
+      console.log(suspense)
+      setTimeout(() => {
+        console.log(suspense)
+        setSuspended(suspense)
+      }, 550)
+    }
   }, [suspense])
 
   const chars = "\\|/-"
@@ -31,7 +35,7 @@ const Loader: React.FC = () => {
   React.useEffect(() => {
     const id = setInterval(() => increaseWidth(loadedRef.current), 7)
     return () => clearInterval(id)
-  }, [loadedRef])
+  }, [loadedRef, increaseWidth])
 
   return (
   <div className={`${suspended ? " flex flex-col" : "hidden"} loader__container`}>
@@ -48,7 +52,7 @@ const Loader: React.FC = () => {
     </div>
     <div className="loader__text-container">
       {width < 300 && <span className="loader__text-spinner">{chars.charAt(num)}&nbsp;</span>}
-      {!error && <span className="loader__text-info">{(loadedRef.current !== 8) ? `Loading ${".".repeat(dots) + "\u00A0".repeat(3 - dots)} ${loadedRef.current}/8` : `Loaded. 8/8`}</span>}
+      {!error && <span className="loader__text-info">{(loadedRef.current !== 7) ? `Loading ${".".repeat(dots) + "\u00A0".repeat(3 - dots)} ${loadedRef.current}/7` : `Loaded. 7/7`}</span>}
       {error && <span className="loader__text-error">ERROR: Retrying {".".repeat(dots)}</span>}
     </div>
   </div>

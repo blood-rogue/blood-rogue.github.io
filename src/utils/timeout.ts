@@ -12,7 +12,7 @@ const timeout = <T>(promise: Promise<T>, delay: number) => {
   })
   .catch(() => {
     clearTimeout(id)
-    throw new Error
+    throw new Error()
   })
 }
 
