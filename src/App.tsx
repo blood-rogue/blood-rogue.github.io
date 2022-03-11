@@ -24,7 +24,7 @@ const App: React.FC = () => {
   const [suspended, setSuspended] = React.useState(suspense)
   console.log(suspense, suspended)
   React.useEffect(() => {
-    setTimeout(() => setSuspended(false), 500)
+    if (suspense !== suspended) setTimeout(() => setSuspended(suspense), 500)
   }, [suspense])
 
   React.useLayoutEffect(() => {
