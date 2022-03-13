@@ -22,17 +22,6 @@ const Loader: React.FC = () => {
       setInc(false)
     }
   }
-  React.useEffect(() => {
-    if (localStorage.getItem("loaded")) localStorage.removeItem("loaded")
-    if (localStorage.getItem("error")) localStorage.removeItem("error")
-    if (localStorage.getItem("ended")) localStorage.removeItem("ended")
-
-    return () => {
-      if (localStorage.getItem("loaded")) localStorage.removeItem("loaded")
-      if (localStorage.getItem("error")) localStorage.removeItem("error")
-      if (localStorage.getItem("ended")) localStorage.removeItem("ended")
-    }
-  })
 
   React.useEffect(() => {
     const id = setInterval(() => increaseWidth(loadedRef.current), 10)
