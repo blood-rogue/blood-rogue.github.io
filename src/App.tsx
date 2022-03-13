@@ -10,7 +10,7 @@ import delay from "./utils/delay";
 import useContextMenu from "./hooks/useContextMenu";
 import useTheme from "./hooks/useTheme";
 import useSourceModal from "./hooks/useSourceModal";
-import useSuspended from "./hooks/useSuspended";
+import useStorage from "./hooks/useStorage";
 
 const Home = React.lazy(() => delay(retry(import("./pages/Home")), 1500))
 const GistCode = React.lazy(() => delay(retry(import("./pages/GistCode")), 1500))
@@ -20,11 +20,7 @@ const App: React.FC = () => {
   const [ctx, ctxEv] = useContextMenu()
   const [theme, setTheme] = useTheme()
   const [open, close, forward] = useSourceModal()
-  const suspense = useSuspended()
-  const [suspended, setSuspended] = React.useState(suspense)
-  React.useEffect(() => {
-    if (suspense !== suspended) setTimeout(() => setSuspended(suspense), 1000)
-  }, [suspense])
+  const [,,ended] = useStorage()
 
   React.useLayoutEffect(() => {
     axios.get<User>(userUrl).then(res => setUser(res.data))
@@ -33,7 +29,7 @@ const App: React.FC = () => {
   const themeBtn = (ref: React.RefObject<HTMLButtonElement> | null) => <button ref={ref} onClick={setTheme}>{theme === "dark" ? <MoonIcon />: <SunIcon />}</button>
 
   return (
-    <div className={suspended ? "hidden" : ""}>
+    <div className={ended ? "" : "hidden"}>
       {user && <Home user={user}/>}
       {open && <SourceModal close={close} forward={forward} />}
       {ctx && <ContextMenu open={ctx} ev={ctxEv ? ctxEv : new MouseEvent("contextmenu", { clientX: 0, clientY: 0 })} />}

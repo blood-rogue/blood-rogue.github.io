@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useVirtualHistory } from "./useVirtualHistory";
+import { useVirtualHistory } from "../hooks/useVirtualHistory";
 
 export const VirtualRouter: React.FC = ({ children }) => {
   const { path } = useVirtualHistory()

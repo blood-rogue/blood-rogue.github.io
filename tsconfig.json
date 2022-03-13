@@ -26,6 +26,5 @@
     "src/pages",
     "src/components",
     "src/highlighter",
-    "src/virtualHistory",
   ]
 }

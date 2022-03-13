@@ -1,6 +1,5 @@
 import * as React from "react"
 import useInterval from "./hooks/useInterval";
-import useSuspended from "./hooks/useSuspended";
 import useStorage from "./hooks/useStorage";
 
 const Loader: React.FC = () => {
@@ -8,13 +7,7 @@ const Loader: React.FC = () => {
   const [dots,setDots] = React.useState(0)
   const [width, setWidth] = React.useState(1)
   const [inc, setInc] = React.useState(true)
-  const suspense = useSuspended()
-  const [suspended, setSuspended] = React.useState(suspense)
   const [loadedRef, error] = useStorage()
-
-  React.useEffect(() => {
-    if (suspense !== suspended) setTimeout(() => setSuspended(suspense) , 550)
-  }, [suspense])
 
   const chars = "\\|/-"
 
@@ -23,7 +16,11 @@ const Loader: React.FC = () => {
 
   const increaseWidth = (load: number) => {
     setWidth(w => (inc && w < (30 * (load + 3))) ? w + 1 : w)
-    if (width === 300) setInc(false)
+    if (width === 300) {
+      localStorage.setItem("ended", "true")
+      window.dispatchEvent(new Event("storage"))
+      setInc(false)
+    }
   }
 
   React.useEffect(() => {
@@ -32,7 +29,7 @@ const Loader: React.FC = () => {
   }, [loadedRef, increaseWidth])
 
   return (
-  <div className={`${suspended ? " flex flex-col" : "hidden"} loader__container`}>
+  <div className={`${inc ? "flex flex-col" : "hidden"} loader__container`}>
     <div className={error ? "loader__progress-error-bg" : "loader__progress-info-bg"}>
       <div
         style={{
