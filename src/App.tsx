@@ -22,7 +22,6 @@ const App: React.FC = () => {
   const [open, close, forward] = useSourceModal()
   const suspense = useSuspended()
   const [suspended, setSuspended] = React.useState(suspense)
-  console.log(suspense, suspended)
   React.useEffect(() => {
     if (suspense !== suspended) setTimeout(() => setSuspended(suspense), 500)
   }, [suspense])

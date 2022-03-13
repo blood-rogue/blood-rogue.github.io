@@ -13,13 +13,8 @@ const Loader: React.FC = () => {
   const [loadedRef, error] = useStorage()
 
   React.useEffect(() => {
-    if (suspense !== suspended) {
-      console.log(suspense)
-      setTimeout(() => {
-        console.log(suspense)
-        setSuspended(suspense)
-      }, 550)
-    }
+    console.log(suspense, suspended)
+    if (suspense !== suspended) setTimeout(() => setSuspended(suspense) , 550)
   }, [suspense])
 
   const chars = "\\|/-"
