@@ -13,7 +13,6 @@ const Loader: React.FC = () => {
   const [loadedRef, error] = useStorage()
 
   React.useEffect(() => {
-    console.log(suspense, suspended)
     if (suspense !== suspended) setTimeout(() => setSuspended(suspense) , 550)
   }, [suspense])
 
@@ -28,10 +27,7 @@ const Loader: React.FC = () => {
   }
 
   React.useEffect(() => {
-    const id = setInterval(() => {
-      setSuspended(useSuspended())
-      increaseWidth(loadedRef.current)
-    }, 10)
+    const id = setInterval(() => increaseWidth(loadedRef.current), 10)
     return () => clearInterval(id)
   }, [loadedRef, increaseWidth])
 
