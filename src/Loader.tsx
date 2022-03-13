@@ -28,7 +28,10 @@ const Loader: React.FC = () => {
   }
 
   React.useEffect(() => {
-    const id = setInterval(() => increaseWidth(loadedRef.current), 7)
+    const id = setInterval(() => {
+      setSuspended(useSuspended())
+      increaseWidth(loadedRef.current)
+    }, 10)
     return () => clearInterval(id)
   }, [loadedRef, increaseWidth])
 

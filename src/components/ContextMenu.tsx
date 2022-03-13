@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface CtxMenuItem {
-  name: string,
+  item: string | JSX.Element,
   onClick: () => void
 }
 
@@ -12,11 +12,11 @@ const ContextMenu: React.FC<{ open: boolean, ev: MouseEvent, items?: CtxMenuItem
   const [height, width] = ctxmenuRef.current ? [ctxmenuRef.current.clientHeight, ctxmenuRef.current.clientWidth] : [211, 160]
   const [dx, dy] = [width, height]
   const { px, py }: { px: number, py: number } = { px: ((dx + clientX) <= w) ? pageX : (pageX - dx), py: ((dy + clientY) <= h) ? pageY : (pageY - dy) }
-  const menuItems: { name: string, onClick: () => void }[] = items || [
-    { name: "item 1", onClick: () => console.log("item 1")},
-    { name: "item 2", onClick: () => console.log("item 2")},
-    { name: "item 3", onClick: () => console.log("item 3")},
-    { name: "item 4", onClick: () => console.log("item 4")}
+  const menuItems: CtxMenuItem[] = items || [
+    { item: "item 1", onClick: () => console.log("item 1")},
+    { item: "item 2", onClick: () => console.log("item 2")},
+    { item: "item 3", onClick: () => console.log("item 3")},
+    { item: "item 4", onClick: () => console.log("item 4")}
   ]
   return (
     <>{open && <div
@@ -25,13 +25,13 @@ const ContextMenu: React.FC<{ open: boolean, ev: MouseEvent, items?: CtxMenuItem
       className={`absolute ${open ? "flex__col" : "hidden"} ctx-menu__container`}
       style={{ top: `${py}px`, left: `${px}px` }}
     >
-      {menuItems.map(({ name, onClick }, i) =>
+      {menuItems.map(({ item, onClick }, i) =>
       <div
         className="ctx-menu__item"
         key={i}
         onClick={onClick}
       >
-        {name}
+        {item}
       </div>)
       }
     </div>}</>

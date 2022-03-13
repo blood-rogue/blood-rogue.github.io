@@ -12,8 +12,8 @@ import useTheme from "./hooks/useTheme";
 import useSourceModal from "./hooks/useSourceModal";
 import useSuspended from "./hooks/useSuspended";
 
-const Home = React.lazy(() => delay(retry(import("./pages/Home")), 3000))
-const GistCode = React.lazy(() => delay(retry(import("./pages/GistCode")), 3000))
+const Home = React.lazy(() => delay(retry(import("./pages/Home")), 1500))
+const GistCode = React.lazy(() => delay(retry(import("./pages/GistCode")), 1500))
 
 const App: React.FC = () => {
   const [user, setUser] = React.useState<User | null>(null)
