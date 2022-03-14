@@ -7,13 +7,13 @@ const tokenToTag = (token : Prism.Token, i: number) => {
     case 'keyword':
       return <span key={i} className="text-purple-500">{token.content}</span>
     case 'builtin':
-      return <span key={i} className="">{token.content}</span>
+      return <span key={i} className="text-purple-500">{token.content}</span>
     case 'class-name':
-      return <span key={i} className="text-blue-600">{token.content}</span>
+      return <span key={i} className="text-blue-500">{token.content}</span>
     case 'function':
-      return <span key={i} className="text-amber-200">{token.content}</span>
+      return <span key={i} className="text-amber-200 opacity-80">{token.content}</span>
     case 'decorator':
-      return <span key={i} className="text-sky-500">{token.content}</span>
+      return <span key={i} className="text-sky-400">{token.content}</span>
     case 'triple-quoted-string':
       return <span key={i} className="text-emerald-500">{token.content}</span>
     case 'boolean':
@@ -27,9 +27,9 @@ const tokenToTag = (token : Prism.Token, i: number) => {
     case 'symbol':
       return <span key={i} className="text-white">{token.content}</span>
     case 'regex':
-      return <span key={i} className="text-amber-900">{token.content}</span>
+      return <span key={i} className="text-amber-800">{token.content}</span>
     case 'url':
-      return <span key={i} className="text-orange-400 underline underline-offset-1">{token.content}</span>
+      return <span key={i} className="text-orange-300 underline underline-offset-1 hover:text-orange-400">{token.content}</span>
     case 'operator':
       return <span key={i} className="text-white">{token.content}</span>
     case 'variable':
