@@ -3,7 +3,6 @@ import * as React from "react";
 import { Gist } from "../api";
 import FileButton from "../components/FileButton";
 import { getHtml } from "../highlighter/highlighter";
-import useTimeout from "../hooks/useTimeout";
 import retry from "../utils/retry";
 
 const TitleHelmet = React.lazy(() => retry(import("../components/TitleHelmet")))
@@ -41,7 +40,7 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
     if (gist && navigator.clipboard) {
       setCopyContents("Copying...")
       await navigator.clipboard.writeText(gist.files[active].content)
-      useTimeout(() => setCopyContents("Copied!"), 200)
+      setTimeout(() => setCopyContents("Copied!"), 200)
     } else {
       alert("Clipboard actions not permitted.")
     }

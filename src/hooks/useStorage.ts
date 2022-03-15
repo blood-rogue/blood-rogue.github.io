@@ -27,7 +27,7 @@ const useStorage = () => {
       window.removeEventListener("storage", handleError)
       window.removeEventListener("storage", handleEnded)
     }
-  }, [handleError, handleLoaded])
+  }, [handleError, handleLoaded, handleEnded])
   return [loadedRef, error, ended] as [React.MutableRefObject<number>, boolean, boolean]
 }
 

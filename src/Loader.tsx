@@ -14,14 +14,14 @@ const Loader: React.FC = () => {
   useInterval(() => setNum(num === 3 ? 0 : num + 1), 63)
   useInterval(() => setDots(dots === 3 ? 0 : dots + 1), 250)
 
-  const increaseWidth = (load: number) => {
+  const increaseWidth = React.useCallback((load: number) => {
     setWidth(w => (inc && w < (30 * (load + 3))) ? w + 1 : w)
     if (width === 300) {
       localStorage.setItem("ended", "true")
       window.dispatchEvent(new Event("storage"))
       setInc(false)
     }
-  }
+  }, [])
 
   React.useEffect(() => {
     const id = setInterval(() => increaseWidth(loadedRef.current), 10)
