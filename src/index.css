@@ -134,18 +134,15 @@
 }
 
 .gist-code__filename-btn {
-  @apply rounded-r-none border-neutral-700 bg-neutral-800 h-8 pb-1 pl-3 w-1/5 text-center text-neutral-300 font-medium text-sm font-mono after:content-['\2022'] after:text-xl after:px-2 after:text-right after:text-green-500 mx-1 select-none min-w-min
+  @apply overflow-hidden rounded-r-none border-neutral-700 bg-neutral-800 h-8 pb-1 pl-3 w-1/5 text-center text-neutral-300 font-medium text-sm font-mono after:content-['\2022'] after:text-xl after:px-2 after:text-right after:text-green-500 mx-1 select-none min-w-min
 }
 
 .gist-code__filename-ripple {
-  @apply absolute rounded-[50%] bg-white bg-opacity-60 animate-[ripple_600ms_linear] scale-0
+  @apply w-5 h-5 absolute bg-neutral-700 block rounded-full opacity-100 animate-ripple
 }
 
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
+.gist-code__filename-content {
+  @apply z-10 relative
 }
 
 .gist-code__container {

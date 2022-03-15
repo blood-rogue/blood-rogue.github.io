@@ -1,7 +1,9 @@
 import axios from "axios";
 import * as React from "react";
 import { Gist } from "../api";
+import FileButton from "../components/FileButton";
 import { getHtml } from "../highlighter/highlighter";
+import useTimeout from "../hooks/useTimeout";
 import retry from "../utils/retry";
 
 const TitleHelmet = React.lazy(() => retry(import("../components/TitleHelmet")))
@@ -12,7 +14,6 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
   const [filenames, setFilenames] = React.useState<string[]>([]);
   const [active, setActive] = React.useState("")
   const [copyContents, setCopyContents] = React.useState("Copy")
-  const [ripple, setRipple] = React.useState<JSX.IntrinsicElements["span"]>(<span />)
   
   React.useEffect(() => {
     axios.get<Gist>("https://api.github.com/gists/" + gistId)
@@ -35,31 +36,12 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
       })
       .then((f) => setActive(f[0]))
   }, [gistId]);
-
-  const createRipple: React.MouseEventHandler<HTMLButtonElement> = (ev) => {
-    const button = ev.currentTarget
-    const diameter = Math.max(button.clientWidth, button.clientHeight)
-    const radius = diameter / 2
-
-    setRipple(<span className="gist-code__filename-ripple" style={{
-      width: `${diameter}px`,
-      height: `${diameter}px`,
-      left: `${ev.clientX - button.offsetLeft - radius}px`,
-      top: `${ev.clientY - button.offsetTop - radius}px`
-    }}></span>)
-  }
   
-  const FileButton: React.FC<{ filename: string, active: boolean }> = ({ filename, active }) => {
-    if (active) return <button onClick={createRipple} className="gist-code__filename-btn">{filename}{ripple}</button>
-    else return <button onClick={(ev) => { setActive(filename); createRipple(ev) }} className="gist-code__filename-btn">{filename}{ripple}</button>
-  }
-  
-  const copy = () => {
+  const copy = async () => {
     if (gist && navigator.clipboard) {
       setCopyContents("Copying...")
-      navigator.clipboard.writeText(gist.files[active].content).then(() => {
-        setTimeout(() => setCopyContents("Copied !"), 200)
-      }).then(() => setTimeout(() => setCopyContents("Copy"), 200))
+      await navigator.clipboard.writeText(gist.files[active].content)
+      useTimeout(() => setCopyContents("Copied!"), 200)
     } else {
       alert("Clipboard actions not permitted.")
     }
@@ -71,7 +53,7 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
     <div id={gistId} className="gist-code__parent">
       <div className="gist-code__container">
         <div className="gist-code__tab-bar">
-          {filenames.map((filename) => <FileButton active={active === filename} filename={filename} />)}
+          {filenames.map((filename) => <FileButton onClick={() => setActive(filename)} active={active === filename} filename={filename} />)}
         </div>
         <div className="gist-code__code-container">
           <pre>{html[active]}</pre>
