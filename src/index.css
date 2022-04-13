@@ -134,7 +134,7 @@
 }
 
 .gist-code__filename-btn {
-  @apply overflow-hidden rounded-r-none border-neutral-700 bg-neutral-800 h-8 pb-1 pl-3 w-1/5 text-center text-neutral-300 font-medium text-sm font-mono after:content-['\2022'] after:text-xl after:px-2 after:text-right after:text-green-500 mx-1 select-none min-w-min
+  @apply overflow-hidden rounded-r-none border-neutral-700 bg-neutral-800 h-8 pb-1 pl-3 w-1/5 text-center text-neutral-300 font-medium text-sm font-mono mx-1 select-none min-w-min
 }
 
 .gist-code__filename-ripple {
