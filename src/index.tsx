@@ -8,14 +8,7 @@ import Loader from './Loader';
 const Root: React.FC = () => {
   React.useEffect(() => {
     if (localStorage.getItem("loaded")) localStorage.removeItem("loaded")
-    if (localStorage.getItem("error")) localStorage.removeItem("error")
-    if (localStorage.getItem("ended")) localStorage.removeItem("ended")
-
-    return () => {
-      if (localStorage.getItem("loaded")) localStorage.removeItem("loaded")
-      if (localStorage.getItem("error")) localStorage.removeItem("error")
-      if (localStorage.getItem("ended")) localStorage.removeItem("ended")
-    }
+    return localStorage.getItem("loaded") ? () => localStorage.removeItem("loaded") : () => {}
   })
 
   return (

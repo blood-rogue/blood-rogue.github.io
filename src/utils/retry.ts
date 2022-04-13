@@ -14,8 +14,7 @@ const defaultArgs: Required<RetryOptions> = {
   retriesDone: 0,
   get onError() {
     return (err: unknown) => {
-      localStorage.setItem("error", "true")
-      window.dispatchEvent(new Event("storage"))
+      window.dispatchEvent(new CustomEvent("error", { detail: true }))
     }
   },
   increment: 0,
@@ -24,7 +23,7 @@ const defaultArgs: Required<RetryOptions> = {
     return () => {
       const loaded = localStorage.getItem("loaded") || "0"
       localStorage.setItem("loaded", (parseInt(loaded) + 1).toString())
-      window.dispatchEvent(new Event("storage"))
+      window.dispatchEvent(new CustomEvent("loaded", { detail: parseInt(loaded) + 1 }))
       console.log("success in", this.retriesDone, "tries")
     }
   }

@@ -17,8 +17,7 @@ const Loader: React.FC = () => {
   const increaseWidth = (load: number) => {
     setWidth(w => (inc && w < (30 * (load + 3))) ? w + 1 : w)
     if (width === 300) {
-      localStorage.setItem("ended", "true")
-      window.dispatchEvent(new Event("storage"))
+      window.dispatchEvent(new CustomEvent("ended", { detail: true}))
       setInc(false)
     }
   }

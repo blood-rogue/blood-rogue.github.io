@@ -1,31 +1,30 @@
 import * as React from "react";
-import parseBoolean from "../utils/parseBoolean";
 import useRefState from "./useRefState";
 
 const useStorage = () => {
   const [loadedRef, setLoaded] = useRefState(0)
   const [error, setError] = React.useState(false)
   const [ended, setEnded] = React.useState(false)
-  const handleLoaded = () => {
-    const item = localStorage.getItem("loaded")
-    if (item && parseInt(item) !== loadedRef.current) setLoaded(parseInt(item))
+  const handleLoaded = (ev: CustomEvent<number>) => {
+    const loaded = ev.detail
+    if (loaded && loaded !== loadedRef.current) setLoaded(loaded)
   }
-  const handleError = () => {
-    const item = localStorage.getItem("error")
-    if (item && parseBoolean(item) !== error) setError(parseBoolean(item))
+  const handleError = (ev: CustomEvent<boolean>) => {
+    const err = ev.detail
+    if (err && err !== error) setError(err)
   }
-  const handleEnded = () => {
-    const item = localStorage.getItem("ended")
-    if (item && parseBoolean(item) !== ended) setEnded(parseBoolean(item))
+  const handleEnded = (ev: CustomEvent) => {
+    const end = ev.detail
+    if (end && end !== ended) setEnded(end)
   }
   React.useEffect(() => {
-    window.addEventListener("storage", handleLoaded)
-    window.addEventListener("storage", handleError)    
-    window.addEventListener("storage", handleEnded)
+    window.addEventListener("loaded", handleLoaded as EventListener)
+    window.addEventListener("error", handleError as EventListener)    
+    window.addEventListener("ended", handleEnded as EventListener)
     return () => {
-      window.removeEventListener("storage", handleLoaded)
-      window.removeEventListener("storage", handleError)
-      window.removeEventListener("storage", handleEnded)
+      window.removeEventListener("loaded", handleLoaded as EventListener)
+      window.removeEventListener("error", handleError as EventListener)
+      window.removeEventListener("ended", handleEnded as EventListener)
     }
   }, [handleError, handleLoaded, handleEnded])
   return [loadedRef, error, ended] as [React.MutableRefObject<number>, boolean, boolean]
