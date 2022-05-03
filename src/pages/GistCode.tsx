@@ -52,6 +52,9 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
     <div id={gistId} className="gist-code__parent">
       <div className="gist-code__container">
         <div className="gist-code__tab-bar">
+          <div className="w-10 h-10 after:content-[\2022]"></div>
+          <div className="w-10 h-10 after:content-[\2022]"></div>
+          <div className="w-10 h-10 after:content-[\2022]"></div>
           {filenames.map((filename) => <FileButton onClick={() => setActive(filename)} active={active === filename} filename={filename} />)}
         </div>
         <div className="gist-code__code-container">
