@@ -9,7 +9,7 @@ export const useVirtualHistory = () => {
     if (targets !== []) {
       ev.preventDefault()
       const { href } = targets[0] as HTMLAnchorElement
-      setHist(hist.concat([href]))
+      setHist([...hist, href])
       setPath(href)
     }
   }
