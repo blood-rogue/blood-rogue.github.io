@@ -26,7 +26,7 @@ const GistCode: React.FC<{ gistId: string }> = ({ gistId }) => {
       })
       .then((res) => {
         for (const { filename } of Object.values(res.files)) {
-          setFilenames([...filenames, filename])
+          setFilenames(fns => [...fns, filename])
         }
         return filenames
       })
